@@ -1,6 +1,8 @@
+import { Button } from '@material-ui/core';
 import { Skeleton, Stack } from '@mui/material';
 import { GetStaticProps } from 'next';
 import React from 'react';
+import { UseCart } from '../hooks/Cart';
 
 import { api } from "../services/api";
 
@@ -14,6 +16,8 @@ interface IDadosProps {
 };
 
 export const index = ({ cards }: IDadosProps) => {
+  const { handlePushProduct } = UseCart();
+
   return (
     <div style={{display: 'flex', flexWrap: 'wrap'}}>
       {cards.map(test => (
@@ -33,6 +37,9 @@ export const index = ({ cards }: IDadosProps) => {
               width={200} 
               height={120} 
             />  
+            <Button variant="contained" onClick={() => handlePushProduct(test.id, cards)}>
+              Adicionar
+            </Button>
           </Stack> 
         </span>
       ))}
