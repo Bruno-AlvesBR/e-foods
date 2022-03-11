@@ -5,8 +5,6 @@ interface IProductProps {
 };
 
 interface ICartContextProps {
-    counter: number;
-    handleSetIncrementCounter: () => void;
 };
 
 interface ICartContextProviderProps {
@@ -16,19 +14,10 @@ interface ICartContextProviderProps {
 export const CartContext = createContext({} as ICartContextProps);
 
 export const CartContextProvider = ({ children }: ICartContextProviderProps) => {
-    let [counter, setCounter] = useState(0);
-
-    const handleSetIncrementCounter = () => {
-        setCounter(counter + 1);
-    };
-
-    console.log(counter);
-
     return (
         <CartContext.Provider
             value={{
-                handleSetIncrementCounter,
-                counter
+
             }}
         >
             {children}
