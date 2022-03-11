@@ -1,3 +1,4 @@
+import { Skeleton, Stack } from '@mui/material';
 import { GetStaticProps } from 'next';
 import React from 'react';
 
@@ -14,11 +15,26 @@ interface IDadosProps {
 
 export const index = ({ cards }: IDadosProps) => {
   return (
-    <div>
+    <div style={{display: 'flex', flexWrap: 'wrap'}}>
       {cards.map(test => (
-        <div key={test.id}>
-          {test.name}  
-        </div>
+        <span style={{margin: 5}} key={test.id}>
+          <Stack spacing={0.5}>
+            <Skeleton 
+              variant="text" 
+              width={200} 
+            />  
+            <Skeleton 
+              variant="circular" 
+              width={50} 
+              height={50} 
+            />  
+            <Skeleton 
+              variant="rectangular" 
+              width={200} 
+              height={120} 
+            />  
+          </Stack> 
+        </span>
       ))}
     </div>
   );
@@ -28,23 +44,23 @@ export default index;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = await api.get('test');
+    const { data } = await api.get('/test');
 
     const cards = data.map(card => {
       return {
         id: card.id,
         name: card.name
-      }
-    })
+      };
+    });
 
     return {
       props: {
         cards
       },
       revalidate: 60
-    }
+    };
   }
-  catch (err) {
+  catch(err) {
     console.log(err);
 
     return {
@@ -52,6 +68,6 @@ export const getStaticProps: GetStaticProps = async () => {
         
       },
       revalidate: 60
-    }
-  }
+    };
+  };
 };
