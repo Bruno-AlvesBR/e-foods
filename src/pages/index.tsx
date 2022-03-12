@@ -1,80 +1,97 @@
-import { Button } from '@material-ui/core';
-import { Skeleton, Stack } from '@mui/material';
-import { GetStaticProps } from 'next';
-import React from 'react';
-import { UseCart } from '../hooks/Cart';
+import { Badge, Button } from "@material-ui/core"
+import { GetStaticProps } from "next"
+import React from "react"
+import router from "next/router"
 
-import { api } from "../services/api";
+import { api, produtos } from "../services/api"
+import Card from "../components/CardProduct"
+import { SkeletonCard } from "../components/Skeleton/index"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+
+import {
+  Container,
+  ContentCards,
+  ContentFilters,
+  LinkCart,
+} from "../styles/home.module"
+import { UseCart } from "../hooks/Cart"
 
 interface IDados {
-  id: number;
-  name: string;
-};
-
-interface IDadosProps {
-  cards: IDados[];
-};
-
-export const index = ({ cards }: IDadosProps) => {
-  const { handlePushProduct } = UseCart();
-
-  return (
-    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      {cards.map(test => (
-        <span style={{margin: 5}} key={test.id}>
-          <Stack spacing={0.5}>
-            <Skeleton 
-              variant="text" 
-              width={200} 
-            />  
-            <Skeleton 
-              variant="circular" 
-              width={50} 
-              height={50} 
-            />  
-            <Skeleton 
-              variant="rectangular" 
-              width={200} 
-              height={120} 
-            />  
-            <Button variant="contained" onClick={() => handlePushProduct(test.id, cards)}>
-              Adicionar
-            </Button>
-          </Stack> 
-        </span>
-      ))}
-    </div>
-  );
+  id: string
+  name: string
+  src: string
+  price: number
 }
 
-export default index;
+interface IDadosProps {
+  products: IDados[]
+}
+
+export const index = ({ products }: IDadosProps) => {
+  const { counter, handleFilter, filter } = UseCart()
+
+  const handleGoToCart = () => {
+    router.push("http://localhost:3000/carrinho")
+  }
+
+  return (
+    <Container>
+      <LinkCart badgeContent={counter} onClick={handleGoToCart} color="primary">
+        <ShoppingCartIcon color="action" />
+      </LinkCart>
+      <ContentFilters>
+        {products.flat(Infinity).map(produto => (
+          <>
+            <input
+              key={produto.id}
+              type="checkbox"
+              value={produto.name}
+              onChange={e => handleFilter(e.target.value)}
+            />
+            {produto.name}
+          </>
+        ))}
+      </ContentFilters>
+      <ContentCards>
+        {products.length !== 0 ? (
+          filter.length !== 0 ? (
+            <Card produto={filter} />
+          ) : (
+            <Card produto={products} />
+          )
+        ) : (
+          <SkeletonCard />
+        )}
+      </ContentCards>
+    </Container>
+  )
+}
+
+export default index
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = await api.get('/test');
-
-    const cards = data.map(card => {
+    const products = produtos.map(card => {
       return {
         id: card.id,
-        name: card.name
-      };
-    });
+        name: card.name,
+        src: card.src,
+        price: card.price,
+      }
+    })
 
     return {
       props: {
-        cards
+        products,
       },
-      revalidate: 60
-    };
+      revalidate: 60,
+    }
+  } catch (err) {
+    console.log(err)
+
+    return {
+      props: {},
+      revalidate: 60,
+    }
   }
-  catch(err) {
-    console.log(err);
-
-    return {
-      props: {
-        
-      },
-      revalidate: 60
-    };
-  };
-};
+}

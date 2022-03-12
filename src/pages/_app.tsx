@@ -1,9 +1,9 @@
-import { CssBaseline } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/core';
-import { theme } from '../styles/theme';
+import { CssBaseline } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/core"
+import { theme } from "../styles/theme"
 
-import { GlobalStyles } from '../styles/globals';
-import { CartContextProvider } from '../hooks/Cart';
+import { GlobalStyles } from "../styles/globals"
+import { CartContextProvider } from "../hooks/Cart"
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
         <main>
           <Component {...pageProps} />
           <GlobalStyles />
-          <CssBaseline /> 
+          <CssBaseline />
         </main>
       </ThemeProvider>
     </CartContextProvider>
