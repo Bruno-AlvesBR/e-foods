@@ -1,44 +1,90 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
+
+import { api, produtos } from "../services/api"
 
 interface IProductProps {
-    id: number;
-    name: string;
-};
+  id: string
+  name: string
+  src: string
+  price: number
+}
 
 interface ICartContextProps {
-    productCart: IProductProps[];
-    handlePushProduct: (id: number, product: IProductProps[]) => void;
-};
+  productCart: IProductProps[]
+  handlePushProduct: (productId: string) => void
+  handleRemoveProductCart: (productId: string) => void
+  handleFilter: (word: string) => void
+  counter: number
+  filter: IProductProps[]
+}
 
 interface ICartContextProviderProps {
-    children: ReactNode;
-};  
+  children: ReactNode
+}
 
-export const CartContext = createContext({} as ICartContextProps);
+export const CartContext = createContext({} as ICartContextProps)
 
-export const CartContextProvider = ({ children }: ICartContextProviderProps) => {
-    const [productCart, setProductCart] = useState([]);
+export const CartContextProvider = ({
+  children,
+}: ICartContextProviderProps) => {
+  const [productCart, setProductCart] = useState([])
+  const [product, setProduct] = useState([])
+  const [counter, setCounter] = useState(0)
+  const [filter, setFilter] = useState([])
 
-    const handlePushProduct = (id: number, product: IProductProps[]) => {
-        const addedProduct = product.filter(value => value.id === id);
+  const handlePushProduct = (productId: string) => {
+    const addedProduct = produtos.filter(produto => {
+      return produto.id === productId
+    })
 
-        setProductCart(initialState => [...initialState, addedProduct]);
-    };
+    setProductCart(initialState => [...initialState, addedProduct])
+  }
 
-    return (
-        <CartContext.Provider
-            value={{
-                productCart,
-                handlePushProduct
-            }}
-        >
-            {children}
-        </CartContext.Provider>
-    )
-};
+  const handleRemoveProductCart = (productId: string) => {
+    const newListProduct = produtos.flat(Infinity).filter(produto => {
+      return produto.id !== productId
+    })
+
+    setProductCart(newListProduct)
+  }
+
+  useMemo(() => {
+    setCounter(productCart.length)
+  }, [setCounter, productCart])
+
+  const handleFilter = (word: string) => {
+    const addFilter = produtos.filter(produto => {
+      return produto.name === word
+    })
+
+    setFilter(initialState => [...initialState, addFilter])
+  }
+
+  return (
+    <CartContext.Provider
+      value={{
+        counter,
+        productCart,
+        filter,
+        handlePushProduct,
+        handleRemoveProductCart,
+        handleFilter,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  )
+}
 
 export const UseCart = () => {
-    const context = useContext(CartContext);
+  const context = useContext(CartContext)
 
-    return context;
-};
+  return context
+}
