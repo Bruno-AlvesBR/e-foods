@@ -31,7 +31,7 @@ export const index = ({ products }: IDadosProps) => {
   const { counter, handleFilter, filter } = UseCart()
 
   const handleGoToCart = () => {
-    router.push("http://localhost:3000/carrinho")
+    router.push("/carrinho")
   }
 
   return (
