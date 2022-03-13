@@ -28,7 +28,8 @@ const Card = ({ produto }: IListCardProps) => {
 							<Image
 								src={`/${produto.src}`}
 								alt={produto.id}
-								layout="fill"
+								width={100}
+								height={100}
 							/>
 							<h1>{produto.name}</h1>
 							<Button
@@ -47,7 +48,7 @@ const Card = ({ produto }: IListCardProps) => {
 								src={`/${produto.src}`}
 								alt={produto.id}
 								width={100}
-								height={150}
+								height={100}
 							/>
 							<h1>{produto.name}</h1>
 							<Button

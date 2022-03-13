@@ -30,17 +30,19 @@ const CardCart = ({ produto }: IListCardProps) => {
                 <Image
                   src={`/${produto.src}`}
                   alt={produto.id}
-                  width={100}
+                  width={70}
                   height={100}
                 />
                 <h1>{produto.name}</h1>
-                <ItemAmount productId={produto.id} />
-                <Button
-                  variant="contained"
-                  onClick={() => handleRemoveProductCart(produto.id)}
-                >
-                  Retirar
-                </Button>
+                <span>
+                  <ItemAmount productId={produto.id} />
+                  <Button
+                    variant="contained"
+                    onClick={() => handleRemoveProductCart(produto.id)}
+                  >
+                    Retirar
+                  </Button> 
+                </span>
               </ContentCard>
             ))}
           </ContentCardsGroup>
