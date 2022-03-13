@@ -21,7 +21,7 @@ export const ItemAmount = ({ productId }: IProductProps) => {
   };
 
   const handleRemoveAmount = () => {
-    if(counterItem <= 0) {
+    if(counterItem <= 1) {
       handleRemoveProductCart(productId);
     };
     setCounterItem(counterItem - 1)
