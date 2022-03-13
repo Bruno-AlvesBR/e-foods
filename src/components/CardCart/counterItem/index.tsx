@@ -21,11 +21,10 @@ export const ItemAmount = ({ productId }: IProductProps) => {
   };
 
   const handleRemoveAmount = () => {
-    if(counterItem <= 1) {
+    if(counterItem <= 0) {
       handleRemoveProductCart(productId);
-    } else {
-      setCounterItem(counterItem - 1)
     };
+    setCounterItem(counterItem - 1)
   };
 
   return (
