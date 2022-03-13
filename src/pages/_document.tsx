@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-sync-scripts */
-import { Children } from "react"
-import Document, { Head, Html, Main, NextScript } from "next/document"
-import { ServerStyleSheets as MaterialUISheets } from "@material-ui/core/styles"
-import { ServerStyleSheet } from "styled-components"
+import { Children } from "react";
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import { ServerStyleSheets as MaterialUISheets } from "@material-ui/core/styles";
+import { ServerStyleSheet } from "styled-components";
 
 interface DocumentProps {
-  disableScripts: boolean
+  disableScripts: boolean;
 }
 
 export default class MyDocument extends Document<DocumentProps> {
@@ -40,22 +40,22 @@ export default class MyDocument extends Document<DocumentProps> {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
 MyDocument.getInitialProps = async ctx => {
-  const materialUISheets = new MaterialUISheets()
-  const sheet = new ServerStyleSheet()
-  const originalRenderPage = ctx.renderPage
+  const materialUISheets = new MaterialUISheets();
+  const sheet = new ServerStyleSheet();
+  const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: App => rest =>
         sheet.collectStyles(materialUISheets.collect(<App {...rest} />)),
-    })
+    });
 
-  const initialProps = await Document.getInitialProps(ctx)
+  const initialProps = await Document.getInitialProps(ctx);
 
   return {
     ...initialProps,
@@ -64,5 +64,5 @@ MyDocument.getInitialProps = async ctx => {
       materialUISheets.getStyleElement(),
       sheet.getStyleElement(),
     ],
-  }
-}
+  };
+};

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useMemo, useState } from "react";
 
 export const CalItemsCart = (price: [number]) => {
   // const [product, setProduct] = useState([]);
@@ -15,4 +15,4 @@ export const CalItemsCart = (price: [number]) => {
   // console.log(price)
   // console.log(product)
   // return product;
-}
+};
