@@ -17,6 +17,6 @@ https://ecommerce-foods.vercel.app/
 	- Ainda na home, voce pode filtrar os itens pelo nome, marcando o checkbox, assim aparecerá somente os itens selecionados pelo usuário.
 	- No carrinho, você consegue retirar um item adicionado.
 
-## Onservação: 
+## Observação: 
 	- Ainda não desenvolvido lógica para cálculo de preços dos itens no carrinho.
-	- Ainda não desenvolvido lógica para não adicionar o mesmo item mais de 1 vez no carrinho.
+	- Em processo de análise e desenvolvimento de uma nova responsividade.
