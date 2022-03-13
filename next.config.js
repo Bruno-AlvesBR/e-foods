@@ -4,6 +4,6 @@ const nextConfig = {
   images: {
     domains: ["./public/"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

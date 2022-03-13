@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
     text-decoration: none;
     font-family: sans-serif;
+    list-style: none;
   };
 
   body {
@@ -15,5 +16,6 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     position: relative;
     background-color: #aaaaaa30;
+    color: 2c;
   };
-`
+`;
