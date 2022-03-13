@@ -37,7 +37,7 @@ export const CartContextProvider = ({
     });
 
     if(existItemCart) { 
-      return;
+      return window.alert("Vá para o carrinho!")
     };
 
     const addedProduct = produtos.flat(Infinity).filter(produto => {

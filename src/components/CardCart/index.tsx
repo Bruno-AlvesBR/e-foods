@@ -2,6 +2,7 @@ import { Button, CircularProgress } from "@material-ui/core";
 import Image from "next/image";
 
 import { UseCart } from "../../hooks/Cart";
+import { ItemAmount } from "./counterItem";
 
 import { Container, Content, ContentCardsGroup, ContentCard } from "./style";
 
@@ -33,6 +34,7 @@ const CardCart = ({ produto }: IListCardProps) => {
                   height={100}
                 />
                 <h1>{produto.name}</h1>
+                <ItemAmount productId={produto.id} />
                 <Button
                   variant="contained"
                   onClick={() => handleRemoveProductCart(produto.id)}
