@@ -32,6 +32,14 @@ export const CartContextProvider = ({
   const [filter, setFilter] = useState([]);
 
   const handlePushProduct = (productId: string) => {
+    const existItemCart = productCart.flat(Infinity).find(produto => {
+      return produto.id === productId;
+    });
+
+    if(existItemCart) { 
+      return;
+    };
+
     const addedProduct = produtos.flat(Infinity).filter(produto => {
       return produto.id === productId;
     });
@@ -60,7 +68,7 @@ export const CartContextProvider = ({
 
     const existItem = filter.flat(Infinity).find(produto => {
       return produto.name === word;
-    });
+    }); 
 
     if(existItem) {
       const removeItem = filter.flat(Infinity).filter(produto => {
