@@ -57,6 +57,18 @@ export const CartContextProvider = ({
     });
 
     setFilter(initialState => [...initialState, addFilter]);
+
+    const existItem = filter.flat(Infinity).find(produto => {
+      return produto.name === word;
+    });
+
+    if(existItem) {
+      const removeItem = filter.flat(Infinity).filter(produto => {
+        return produto.name !== word;
+      });
+
+      setFilter(removeItem)
+    };
   };
 
   return (

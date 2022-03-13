@@ -3,7 +3,6 @@ import { UseCart } from "../hooks/Cart";
 
 import CardCart from "../components/CardCart";
 import { useRouter } from "next/router";
-import { Button } from "@material-ui/core";
 
 const carrinho = () => {
   const { productCart } = UseCart();
@@ -18,7 +17,7 @@ const carrinho = () => {
   return (
     <div style={{ display: "flex", flexDirection: 'column'}}>
       <span style={{display: 'flex', alignItems: 'center', gap: 3.5}}>
-        <Button variant="text" onClick={handleBackToHome}>Home</Button>
+        <h2 onClick={handleBackToHome}>Home</h2>
         |
         <h2>Carrinho</h2>
       </span>
