@@ -17,31 +17,50 @@ interface IListCardProps {
 }
 
 const Card = ({ produto }: IListCardProps) => {
-	const { handlePushProduct } = UseCart();
+	const { handlePushProduct, filter } = UseCart();
 
 	return (
 		<>
-			{produto ? (
-				produto.map(produto => (
-					<ContentCard key={produto.id}>
-						<Image
-							src={`/${produto.src}`}
-							alt={produto.id}
-							width={100}
-							height={150}
-						/>
-						<h1>{produto.name}</h1>
-						<Button
-							variant="contained"
-							startIcon={<ShoppingCartIcon />}
-							onClick={() => handlePushProduct(produto.id)}
-						>
-							+ Carrinho
-						</Button>
-					</ContentCard>
-				))
-			) : (
-				<CircularProgress />
+			{produto.length && (
+				filter.length !== 0 ? (
+					filter.flat(Infinity).map(produto => (
+						<ContentCard key={produto.id}>
+							<Image
+								src={`/${produto.src}`}
+								alt={produto.id}
+								width={100}
+								height={100}
+							/>
+							<h1>{produto.name}</h1>
+							<Button
+								variant="contained"
+								startIcon={<ShoppingCartIcon />}
+								onClick={() => handlePushProduct(produto.id)}
+							>
+								+ Carrinho
+							</Button>
+						</ContentCard>
+					))
+				) : (
+					produto.map(produto => (
+						<ContentCard key={produto.id}>
+							<Image
+								src={`/${produto.src}`}
+								alt={produto.id}
+								width={100}
+								height={150}
+							/>
+							<h1>{produto.name}</h1>
+							<Button
+								variant="contained"
+								startIcon={<ShoppingCartIcon />}
+								onClick={() => handlePushProduct(produto.id)}
+							>
+								+ Carrinho
+							</Button>
+						</ContentCard>
+					))
+				)
 			)}
 		</>
 	);

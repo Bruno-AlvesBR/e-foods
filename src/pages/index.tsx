@@ -1,10 +1,8 @@
 import { GetStaticProps } from "next";
 import React from "react";
 
-import { UseCart } from "../hooks/Cart";
 import { produtos } from "../services/api";
 import Card from "../components/CardProduct";
-import { SkeletonCard } from "../components/Skeleton/index";
 
 import {
   Container,
@@ -25,21 +23,13 @@ interface IDadosProps {
 }
 
 export const index = ({ products }: IDadosProps) => {
-  const { filter } = UseCart();
-
   return (
     <Container>
       <ContainerProducts>
         <Filters products={products} />
         <ContentCards>
-          {products.length !== 0 ? (
-            filter.length !== 0 ? (
-              <Card produto={filter} />
-            ) : (
-              <Card produto={products} />
-            )
-          ) : (
-            <SkeletonCard />
+          {products.length !== 0 && (
+            <Card produto={products} />
           )}
         </ContentCards>
       </ContainerProducts>
