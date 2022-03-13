@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		const products = produtos.map(card => ({
 			id: card.id,
 			name: card.name,
-			src: card.src,
+			src: card.src, 
 			price: card.price,
 		}));
 

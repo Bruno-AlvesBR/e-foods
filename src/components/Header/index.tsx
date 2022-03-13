@@ -19,7 +19,7 @@ export const Header = () => {
         <LinkCart 
           badgeContent={counter} 
           onClick={handleGoToCart} 
-          color="primary"
+          color="primary" 
         >
           <ShoppingCartIcon color="action" />
         </LinkCart>
