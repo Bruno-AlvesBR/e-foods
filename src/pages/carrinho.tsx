@@ -4,6 +4,11 @@ import { UseCart } from "../hooks/Cart";
 import CardCart from "../components/CardCart";
 import { useRouter } from "next/router";
 
+import {
+  Container,
+  ContentHeader
+} from '../styles/carrinho.module';
+
 const carrinho = () => {
   const { productCart } = UseCart();
 
@@ -15,14 +20,14 @@ const carrinho = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: 'column'}}>
-      <span style={{display: 'flex', alignItems: 'center', gap: 3.5}}>
+    <Container>
+      <ContentHeader>
         <h2 onClick={handleBackToHome}>Home</h2>
-        |
+        -
         <h2>Carrinho</h2>
-      </span>
+      </ContentHeader>
       <CardCart produto={productCart} />
-    </div>
+    </Container>
   );
 };
 
