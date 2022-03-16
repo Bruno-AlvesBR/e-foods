@@ -20,4 +20,3 @@ https://ecommerce-foods.vercel.app/
 
 ## Observação: 
 	- Ainda não desenvolvido lógica para cálculo de preços dos itens no carrinho.
-	- Em processo de análise e desenvolvimento de uma nova responsividade.
