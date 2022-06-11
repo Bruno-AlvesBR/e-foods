@@ -1,13 +1,10 @@
-import React from "react";
-import { UseCart } from "../hooks/Cart";
+import React from 'react';
+import { UseCart } from '../hooks/Cart';
 
-import CardCart from "../components/CardCart";
-import { useRouter } from "next/router";
+import CardCart from '../components/CardCart';
+import { useRouter } from 'next/router';
 
-import {
-  Container,
-  ContentHeader
-} from '../styles/carrinho.module';
+import { Container, ContentHeader } from '../styles/carrinho.module';
 
 const carrinho = () => {
   const { productCart } = UseCart();
@@ -16,17 +13,17 @@ const carrinho = () => {
   const router = useRouter();
 
   const handleBackToHome = () => {
-    router.push('/')
+    router.push('/');
   };
 
   return (
     <Container>
       <ContentHeader>
         <h2 onClick={handleBackToHome}>Home</h2>
-        -
+        {' / '}
         <h2>Carrinho</h2>
       </ContentHeader>
-      <CardCart produto={productCart} />
+      <CardCart foods={productCart} />
     </Container>
   );
 };

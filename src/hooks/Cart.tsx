@@ -1,21 +1,14 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
-
-import { produtos } from "../services/api";
-
-interface IProductProps {
-  id: string;
-  name: string;
-  src: string;
-  price: number;
-}
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { IFoodProps } from '../interfaces/IFoods';
+import { foodService } from '../services';
 
 interface ICartContextProps {
-  productCart: IProductProps[];
+  productCart: IFoodProps[];
   handlePushProduct: (productId: string) => void;
   handleRemoveProductCart: (productId: string) => void;
   handleFilter: (word: string) => void;
   counter: number;
-  filter: IProductProps[];
+  filter: IFoodProps[];
 }
 
 interface ICartContextProviderProps {
@@ -31,24 +24,28 @@ export const CartContextProvider = ({
   const [counter, setCounter] = useState(0);
   const [filter, setFilter] = useState([]);
 
-  const handlePushProduct = (productId: string) => {
-    const existItemCart = productCart.flat(Infinity).find(produto => {
+  const handlePushProduct = async (productId: string) => {
+    const productData = await foodService?.findAll();
+
+    const existItemCart = productCart?.find(produto => {
       return produto.id === productId;
     });
 
-    if(existItemCart) { 
-      return window.alert("Vá para o carrinho!")
-    };
+    if (existItemCart) {
+      return window.alert('Vá para o carrinho!');
+    }
 
-    const addedProduct = produtos.flat(Infinity).filter(produto => {
+    const addedProduct = productData?.filter(produto => {
       return produto.id === productId;
     });
 
-    setProductCart(initialState => [...initialState, addedProduct]);
+    setProductCart(initialState => [...initialState, ...addedProduct]);
   };
 
-  const handleRemoveProductCart = (productId: string) => {
-    const newListProduct = productCart.flat(Infinity).filter(produto => {
+  const handleRemoveProductCart = async (productId: string) => {
+    const productData = await foodService?.findAll();
+
+    const newListProduct = productCart?.filter(produto => {
       return produto.id !== productId;
     });
 
@@ -59,24 +56,26 @@ export const CartContextProvider = ({
     setCounter(productCart.length);
   }, [setCounter, productCart]);
 
-  const handleFilter = (word: string) => {
-    const addFilter = produtos.flat(Infinity).filter(produto => {
-      return produto.name === word;
+  const handleFilter = async (word: string) => {
+    const productData = await foodService?.findAll();
+
+    const addFilter = productData?.filter(produto => {
+      return produto?.id === word;
     });
 
-    setFilter(initialState => [...initialState, addFilter]);
+    setFilter(old => [...old, ...addFilter]);
 
-    const existItem = filter.flat(Infinity).find(produto => {
-      return produto.name === word;
-    }); 
+    const existItem = filter?.find(produto => {
+      return produto?.id === word;
+    });
 
-    if(existItem) {
-      const removeItem = filter.flat(Infinity).filter(produto => {
-        return produto.name !== word;
+    if (existItem) {
+      const removeItem = filter?.filter(produto => {
+        return produto?.id !== word;
       });
 
-      setFilter(removeItem)
-    };
+      setFilter(removeItem);
+    }
   };
 
   return (

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-sync-scripts */
-import { Children } from "react";
-import Document, { Head, Html, Main, NextScript } from "next/document";
-import { ServerStyleSheets as MaterialUISheets } from "@material-ui/core/styles";
-import { ServerStyleSheet } from "styled-components";
+import { Children } from 'react';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { ServerStyleSheets as MaterialUISheets } from '@material-ui/core/styles';
+import { ServerStyleSheet } from 'styled-components';
 
 interface DocumentProps {
   disableScripts: boolean;
@@ -33,7 +33,7 @@ export default class MyDocument extends Document<DocumentProps> {
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
-          ></link>
+          />
         </Head>
         <body>
           <Main />

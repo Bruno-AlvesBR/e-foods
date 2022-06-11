@@ -1,10 +1,11 @@
-import { Button, CircularProgress } from "@material-ui/core";
-import Image from "next/image";
+import { Button, CircularProgress } from '@material-ui/core';
+import Image from 'next/image';
 
-import { UseCart } from "../../hooks/Cart";
-import { ItemAmount } from "./counterItem";
+import { UseCart } from '../../hooks/Cart';
+import { IFoods } from '../../interfaces/IFoods';
+import { ItemAmount } from './counterItem';
 
-import { Container, Content, ContentCardsGroup, ContentCard } from "./style";
+import { Container, Content, ContentCardsGroup, ContentCard } from './style';
 
 interface ICardProps {
   id: string;
@@ -17,31 +18,31 @@ interface IListCardProps {
   produto: ICardProps[];
 }
 
-const CardCart = ({ produto }: IListCardProps) => {
+const CardCart = ({ foods }: IFoods) => {
   const { handleRemoveProductCart } = UseCart();
 
   return (
     <Container>
-      {produto ? (
+      {foods?.length !== 0 ? (
         <>
           <ContentCardsGroup>
-            {produto.flat(Infinity).map(produto => (
-              <ContentCard key={produto.id}>
+            {foods?.map(item => (
+              <ContentCard key={item?.id}>
                 <Image
-                  src={`/${produto.src}`}
-                  alt={produto.id}
+                  src={item?.image?.desktopSrc}
+                  alt={item?.id}
                   width={70}
                   height={100}
                 />
-                <h1>{produto.name}</h1>
+                <h1>{item?.title}</h1>
                 <span>
-                  <ItemAmount productId={produto.id} />
+                  <ItemAmount productId={item?.id} />
                   <Button
                     variant="contained"
-                    onClick={() => handleRemoveProductCart(produto.id)}
+                    onClick={() => handleRemoveProductCart(item?.id)}
                   >
                     Retirar
-                  </Button> 
+                  </Button>
                 </span>
               </ContentCard>
             ))}

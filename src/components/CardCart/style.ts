@@ -1,29 +1,29 @@
-import { styled } from "@material-ui/core"
+import { styled } from '@material-ui/core';
 
-export const Container = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-  width: "100%",
+export const Container = styled('div')(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
   gap: 10,
 
   '@media (max-width: 650px)': {
     flexDirection: 'column',
   },
-}))
+}));
 
-export const ContentCard = styled("span")(() => ({
-  display: "flex",
-  justifyContent: "space-between",
+export const ContentCard = styled('span')(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
   alignItems: 'center',
   height: 'fit-content',
   maxHeight: 75,
   flex: 1,
-  position: "relative",
+  position: 'relative',
 
   '& span': {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   '@media (max-width: 850px)': {
@@ -32,35 +32,35 @@ export const ContentCard = styled("span")(() => ({
     },
 
     '& button': {
-      width: 'fit-content'
+      width: 'fit-content',
     },
   },
 
   '@media (max-width: 400px)': {
     '& h1': {
-      fontSize: '.70rem'
+      fontSize: '.70rem',
     },
   },
-}))
+}));
 
-export const Content = styled("span")(() => ({
+export const Content = styled('span')(() => ({
   width: 300,
   height: 450,
-  background: "#fff",
-  boxShadow: "0 0 10px #00000020",
+  background: '#fff',
+  boxShadow: '0 0 10px #00000020',
   margin: '0 10px 10px 0',
 
   '@media (max-width: 650px)': {
-    width: '100%'
+    width: '100%',
   },
-}))
+}));
 
-export const ContentCardsGroup = styled("div")(() => ({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  background: "#fff",
-  boxShadow: "0 0 10px #00000020",
-  height: "fit-content",
-  padding: 15
-}))
+export const ContentCardsGroup = styled('div')(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  background: '#fff',
+  boxShadow: '0 0 10px #00000020',
+  height: 'fit-content',
+  padding: 15,
+}));

@@ -1,69 +1,56 @@
-import { Button, CircularProgress } from "@material-ui/core";
-import Image from "next/image";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button } from '@material-ui/core';
+import Image from 'next/image';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-import { UseCart } from "../../hooks/Cart";
+import { UseCart } from '../../hooks/Cart';
+import { IFoodProps, IFoods } from '../../interfaces/IFoods';
 
-import { ContentCard } from "./style";
+import { ContentCard } from './style';
 
-interface ICardProps {
-	id: string;
-	name: string;
-	src: string;
-}
+const Card = ({ foods }: IFoods) => {
+  const { handlePushProduct, filter } = UseCart();
 
-interface IListCardProps {
-	produto: ICardProps[];
-}
-
-const Card = ({ produto }: IListCardProps) => {
-	const { handlePushProduct, filter } = UseCart();
-
-	return (
-		<>
-			{produto.length && (
-				filter.length !== 0 ? (
-					filter.flat(Infinity).map(produto => (
-						<ContentCard key={produto.id}>
-							<Image
-								src={`/${produto.src}`}
-								alt={produto.id}
-								width={100}
-								height={100}
-							/>
-							<h1>{produto.name}</h1>
-							<Button
-								variant="contained"
-								startIcon={<ShoppingCartIcon />}
-								onClick={() => handlePushProduct(produto.id)}
-							>
-								+ Carrinho
-							</Button>
-						</ContentCard>
-					))
-				) : (
-					produto.map(produto => (
-						<ContentCard key={produto.id}>
-							<Image
-								src={`/${produto.src}`}
-								alt={produto.id}
-								width={100}
-								height={100}
-							/>
-							<h1>{produto.name}</h1>
-							<Button
-								variant="contained"
-								startIcon={<ShoppingCartIcon />}
-								onClick={() => handlePushProduct(produto.id)}
-							>
-								+ Carrinho
-							</Button>
-						</ContentCard>
-					))
-				)
-			)}
-		</>
-	);
+  return (
+    <>
+      {filter?.length !== 0
+        ? filter?.map(item => (
+            <ContentCard key={item?.id}>
+              <Image
+                src={item?.image?.desktopSrc}
+                alt={item?.title}
+                width={120}
+                height={120}
+              />
+              <h1>{item?.title}</h1>
+              <Button
+                variant="contained"
+                startIcon={<ShoppingCartIcon />}
+                onClick={() => handlePushProduct(item?.id)}
+              >
+                + Carrinho
+              </Button>
+            </ContentCard>
+          ))
+        : foods?.map(item => (
+            <ContentCard key={item?.id}>
+              <Image
+                src={item?.image?.desktopSrc}
+                alt={item?.title}
+                width={120}
+                height={120}
+              />
+              <h1>{item?.title}</h1>
+              <Button
+                variant="contained"
+                startIcon={<ShoppingCartIcon />}
+                onClick={() => handlePushProduct(item?.id)}
+              >
+                + Carrinho
+              </Button>
+            </ContentCard>
+          ))}
+    </>
+  );
 };
 
 export default Card;

@@ -1,37 +1,22 @@
-import { GetStaticProps } from "next";
-import React from "react";
+import { GetStaticProps } from 'next';
 
-import { produtos } from "../services/api";
-import Card from "../components/CardProduct";
+import Card from '../components/CardProduct';
+import { Filters } from '../components/Filters';
+import { foodService } from '../services';
+import { IFoods } from '../interfaces/IFoods';
 
 import {
   Container,
   ContainerProducts,
   ContentCards,
-} from "../styles/home.module";
-import { Filters } from "../components/Filters";
+} from '../styles/home.module';
 
-interface IDados {
-  id: string;
-  name: string;
-  src: string;
-  price: number;
-}
-
-interface IDadosProps {
-  products: IDados[];
-}
-
-export const index = ({ products }: IDadosProps) => {
+const index: React.FC<IFoods> = ({ foods }) => {
   return (
     <Container>
       <ContainerProducts>
-        <Filters products={products} />
-        <ContentCards>
-          {products.length !== 0 && (
-            <Card produto={products} />
-          )}
-        </ContentCards>
+        <Filters foods={foods} />
+        <ContentCards>{foods && <Card foods={foods} />}</ContentCards>
       </ContainerProducts>
     </Container>
   );
@@ -41,16 +26,11 @@ export default index;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const products = produtos.map(card => ({
-      id: card.id,
-      name: card.name,
-      src: card.src,
-      price: card.price,
-    }));
+    const foods = await foodService?.findAll();
 
     return {
       props: {
-        products,
+        foods,
       },
       revalidate: 60,
     };

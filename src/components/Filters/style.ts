@@ -14,11 +14,11 @@ export const ContainerFilters = styled('div')(() => ({
   '& h1': {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
 
   '@media (max-width: 650px)': {
     minWidth: 0,
-    width: '100%'
+    width: '100%',
   },
 }));

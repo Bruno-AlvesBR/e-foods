@@ -1,4 +1,4 @@
-import { Stack, Skeleton } from "@mui/material";
+import { Stack, Skeleton } from '@mui/material';
 
 export const SkeletonCard = () => {
   return (
