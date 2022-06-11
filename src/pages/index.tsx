@@ -1,7 +1,7 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 
 import Card from '../components/CardProduct';
-import { Filters } from '../components/Filters';
+import Filters from '../components/Filters';
 import { foodService } from '../services';
 import { IFoods } from '../interfaces/IFoods';
 
@@ -11,7 +11,7 @@ import {
   ContentCards,
 } from '../styles/home.module';
 
-const index: React.FC<IFoods> = ({ foods }) => {
+const index: NextPage<IFoods> = ({ foods }) => {
   return (
     <Container>
       <ContainerProducts>
@@ -32,15 +32,16 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         foods,
       },
-      revalidate: 60,
+      revalidate: 60 * 60 * 24,
     };
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.log(err);
 
     return {
-      props: {},
-      revalidate: 60,
+      props: {
+        foods: [],
+      },
+      revalidate: 60 * 60 * 24,
     };
   }
 };

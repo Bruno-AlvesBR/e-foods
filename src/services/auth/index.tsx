@@ -9,7 +9,7 @@ const login = async ({ email, password }: IUserLogin) => {
 
   const userResponse = await api.post('user/login', { email, password });
 
-  return userResponse?.data || [];
+  return userResponse?.data ?? {};
 };
 
 export { login };

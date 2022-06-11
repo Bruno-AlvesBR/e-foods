@@ -16,6 +16,5 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     position: relative;
     background-color: #aaaaaa30;
-    color: 2c;
   };
 `;

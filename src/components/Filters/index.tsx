@@ -1,23 +1,25 @@
 import { Button } from '@material-ui/core';
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
+import { memo, useCallback, useState } from 'react';
 
-import React, { useState } from 'react';
-import { UseCart } from '../../hooks/Cart';
+import { useCart } from '../../hooks/Cart';
 import { IFoods } from '../../interfaces/IFoods';
 
 import { ContainerFilters } from './style';
 
-export const Filters = ({ foods }: IFoods) => {
-  const { handleFilter } = UseCart();
-  const [counterItems, setCounterItems] = useState(5);
-  const [showFilters, setShowFilters] = useState(false);
+const Filters = ({ foods }: IFoods) => {
+  const [{ handleFilterProduct }] = [useCart()];
 
-  const handleExpandItems = () => {
+  const [counterItems, setCounterItems] = useState<number>(5);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+
+  const handleExpandItems = useCallback(() => {
     setCounterItems(foods?.length);
+
     if (counterItems === foods?.length) {
       setCounterItems(5);
     }
-  };
+  }, [counterItems, foods?.length]);
 
   return (
     <ContainerFilters>
@@ -25,14 +27,15 @@ export const Filters = ({ foods }: IFoods) => {
         Filtrar por:
         {showFilters ? <ArrowDropDown /> : <ArrowDropUp />}
       </h1>
-      <span style={showFilters ? { display: 'flex' } : { display: 'none' }}>
+
+      <span style={{ display: showFilters ? 'flex' : 'none' }}>
         <ul>
-          {foods?.slice(0, counterItems)?.map(item => (
+          {foods?.slice(0, counterItems).map(item => (
             <li key={item?.id}>
               <input
                 type="checkbox"
                 value={item?.id}
-                onChange={e => handleFilter(e.target.value)}
+                onChange={e => handleFilterProduct(e.target.value)}
               />
               {item?.title}
             </li>
@@ -42,10 +45,12 @@ export const Filters = ({ foods }: IFoods) => {
             color="primary"
             onClick={handleExpandItems}
           >
-            {counterItems === 5 ? <>Expandir</> : <>Reduzir</>}
+            {counterItems === 5 ? 'Expandir' : 'Reduzir'}
           </Button>
         </ul>
       </span>
     </ContainerFilters>
   );
 };
+
+export default memo(Filters);

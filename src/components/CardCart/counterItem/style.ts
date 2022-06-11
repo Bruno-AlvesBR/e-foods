@@ -1,4 +1,6 @@
-import { Button, styled, TextField } from '@material-ui/core';
+import { styled } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export const Container = styled('div')(() => ({
   '& button': {

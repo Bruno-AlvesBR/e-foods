@@ -1,42 +1,50 @@
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Image from 'next/image';
+import { memo, useState } from 'react';
 
-import { UseCart } from '../../hooks/Cart';
-import { IFoods } from '../../interfaces/IFoods';
+import { useCart } from '../../hooks/Cart';
+import { IProducts } from '../../interfaces/IProduct';
+import { CalcPriceItem } from '../../utils/CalcItemsCart';
 import { ItemAmount } from './counterItem';
 
-import { Container, Content, ContentCardsGroup, ContentCard } from './style';
+import {
+  Container,
+  Content,
+  ContentGroup,
+  ContentCard,
+  ContentImage,
+  Title,
+} from './style';
 
-interface ICardProps {
-  id: string;
-  name: string;
-  src: string;
-  price: number;
-}
+const CardCart = ({ products }: IProducts) => {
+  const { handleRemoveProductCart } = useCart();
 
-interface IListCardProps {
-  produto: ICardProps[];
-}
-
-const CardCart = ({ foods }: IFoods) => {
-  const { handleRemoveProductCart } = UseCart();
+  const [counterItem, setCounterItem] = useState<number>(1);
 
   return (
     <Container>
-      {foods?.length !== 0 ? (
+      {products?.length !== 0 && (
         <>
-          <ContentCardsGroup>
-            {foods?.map(item => (
+          <ContentGroup>
+            {products?.map(item => (
               <ContentCard key={item?.id}>
-                <Image
-                  src={item?.image?.desktopSrc}
-                  alt={item?.id}
-                  width={70}
-                  height={100}
-                />
-                <h1>{item?.title}</h1>
-                <span>
-                  <ItemAmount productId={item?.id} />
+                <ContentImage>
+                  <Image
+                    src={item?.image?.desktopSrc}
+                    alt={item?.id}
+                    layout="fill"
+                  />
+                </ContentImage>
+                <Title>{item?.title}</Title>
+                <div>
+                  {CalcPriceItem(item?.price?.priceNumber, counterItem)}
+                </div>
+                <span style={{ marginLeft: 'auto' }}>
+                  <ItemAmount
+                    id={item?.id}
+                    setCounterItem={setCounterItem}
+                    counterItem={counterItem}
+                  />
                   <Button
                     variant="contained"
                     onClick={() => handleRemoveProductCart(item?.id)}
@@ -46,14 +54,12 @@ const CardCart = ({ foods }: IFoods) => {
                 </span>
               </ContentCard>
             ))}
-          </ContentCardsGroup>
-          <Content></Content>
+          </ContentGroup>
         </>
-      ) : (
-        <CircularProgress />
       )}
+      <Content />
     </Container>
   );
 };
 
-export default CardCart;
+export default memo(CardCart);

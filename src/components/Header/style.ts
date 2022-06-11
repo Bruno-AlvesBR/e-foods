@@ -9,4 +9,5 @@ export const Navbar = styled(AppBar)(() => ({
 
 export const LinkCart = styled(Badge)(() => ({
   width: 25,
+  cursor: 'pointer',
 }));

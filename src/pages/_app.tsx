@@ -1,25 +1,22 @@
-import { CssBaseline } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core';
+
+import { CartProvider } from '../hooks/Cart';
+import Header from '../components/Header';
 
 import { theme } from '../styles/theme';
 import { GlobalStyles } from '../styles/globals';
-import { CartContextProvider } from '../hooks/Cart';
-import { Header } from '../components/Header';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <CartContextProvider>
+    <CartProvider>
       <ThemeProvider theme={theme}>
-        <header>
-          <Header />
-        </header>
-        <main>
-          <Component {...pageProps} />
-          <GlobalStyles />
-          <CssBaseline />
-        </main>
+        <Header />
+        <Component {...pageProps} />
+        <GlobalStyles />
+        <CssBaseline />
       </ThemeProvider>
-    </CartContextProvider>
+    </CartProvider>
   );
 }
 

@@ -1,20 +1,14 @@
-import React from 'react';
-import { UseCart } from '../hooks/Cart';
-
-import CardCart from '../components/CardCart';
 import { useRouter } from 'next/router';
+
+import { useCart } from '../hooks/Cart';
+import CardCart from '../components/CardCart';
 
 import { Container, ContentHeader } from '../styles/carrinho.module';
 
-const carrinho = () => {
-  const { productCart } = UseCart();
+const Carrinho = () => {
+  const [{ productsCart }, router] = [useCart(), useRouter()];
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const router = useRouter();
-
-  const handleBackToHome = () => {
-    router.push('/');
-  };
+  const handleBackToHome = () => router.push('/');
 
   return (
     <Container>
@@ -23,9 +17,9 @@ const carrinho = () => {
         {' / '}
         <h2>Carrinho</h2>
       </ContentHeader>
-      <CardCart foods={productCart} />
+      <CardCart products={productsCart} />
     </Container>
   );
 };
 
-export default carrinho;
+export default Carrinho;

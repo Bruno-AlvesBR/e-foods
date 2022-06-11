@@ -1,17 +1,16 @@
 import { Toolbar } from '@material-ui/core';
-
-import { UseCart } from '../../hooks/Cart';
 import router from 'next/router';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+import { useCart } from '../../hooks/Cart';
+
 import { LinkCart, Navbar } from './style';
+import { memo } from 'react';
 
-export const Header = () => {
-  const { counter } = UseCart();
+const Header: React.FC = () => {
+  const [{ counter }] = [useCart()];
 
-  const handleGoToCart = () => {
-    router.push('/carrinho');
-  };
+  const handleGoToCart = () => router.push('/carrinho');
 
   return (
     <Navbar>
@@ -27,3 +26,5 @@ export const Header = () => {
     </Navbar>
   );
 };
+
+export default memo(Header);

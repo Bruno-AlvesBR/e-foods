@@ -1,6 +1,8 @@
-import { Stack, Skeleton } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Skeleton from '@mui/material/Skeleton';
+import { memo } from 'react';
 
-export const SkeletonCard = () => {
+const SkeletonCard: React.FC = () => {
   return (
     <Stack spacing={0.5}>
       <Skeleton variant="text" width={200} />
@@ -9,3 +11,5 @@ export const SkeletonCard = () => {
     </Stack>
   );
 };
+
+export default memo(SkeletonCard);
