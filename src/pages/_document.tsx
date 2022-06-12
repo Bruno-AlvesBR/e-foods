@@ -1,7 +1,12 @@
 /* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-sync-scripts */
 import { Children } from 'react';
-import Document, { Head, Html, Main, NextScript } from 'next/document';
+import Document, {
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
 import { ServerStyleSheets as MaterialUISheets } from '@material-ui/core/styles';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -24,10 +29,13 @@ export default class MyDocument extends Document<DocumentProps> {
             href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
             rel="stylesheet"
           />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+          />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500@600@700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap"
             rel="stylesheet"
           />
           <link
@@ -52,7 +60,9 @@ MyDocument.getInitialProps = async ctx => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: App => rest =>
-        sheet.collectStyles(materialUISheets.collect(<App {...rest} />)),
+        sheet.collectStyles(
+          materialUISheets.collect(<App {...rest} />),
+        ),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
