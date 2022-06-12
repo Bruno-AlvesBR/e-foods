@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import { useCart } from '../../../hooks/Cart';
-import { IProductProps, IProducts } from '../../../interfaces/IProduct';
+import { useCart } from '../../../../hooks/Cart';
+import { IProductProps, IProducts } from '../../../../interfaces/IProduct';
 
 import { Container, ButtonAdd, ButtonRemove, InputAmount } from './style';
 

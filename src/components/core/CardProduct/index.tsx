@@ -2,33 +2,38 @@ import { Button } from '@material-ui/core';
 import Image from 'next/image';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { memo } from 'react';
+import { useRouter } from 'next/router';
 
-import { useCart } from '../../hooks/Cart';
-import { IFoods } from '../../interfaces/IFoods';
+import { useCart } from '../../../hooks/Cart';
+import { IFoods } from '../../../interfaces/IFoods';
 
 import { ContentCard } from './style';
 
 const Card = ({ foods }: IFoods) => {
-  const { handlePushProduct, productsFilters } = useCart();
+  const [{ handlePushProduct, productsFilters }, router] = [
+    useCart(),
+    useRouter(),
+  ];
 
   const ProductsFilter: React.FC = () => {
     return (
       <>
         {productsFilters?.map(item => (
           <ContentCard key={item?.id}>
-            <Image
-              src={item?.image?.desktopSrc}
-              alt={item?.title}
-              width={120}
-              height={120}
-            />
+            {item?.image?.desktopSrc && (
+              <Image
+                src={item?.image?.desktopSrc}
+                alt={item?.title}
+                width={120}
+                height={120}
+              />
+            )}
             <h1>{item?.title}</h1>
             <Button
               variant="contained"
-              startIcon={<ShoppingCartIcon />}
-              onClick={() => handlePushProduct(item?.id)}
+              onClick={() => router.push(`/produtos/alimentos/${item?.slug}`)}
             >
-              + Carrinho
+              Ver
             </Button>
           </ContentCard>
         ))}
@@ -41,19 +46,20 @@ const Card = ({ foods }: IFoods) => {
       <>
         {foods?.map(item => (
           <ContentCard key={item?.id}>
-            <Image
-              src={item?.image?.desktopSrc}
-              alt={item?.title}
-              width={120}
-              height={120}
-            />
+            {item?.image?.desktopSrc && (
+              <Image
+                src={item?.image?.desktopSrc}
+                alt={item?.title}
+                width={120}
+                height={120}
+              />
+            )}
             <h1>{item?.title}</h1>
             <Button
               variant="contained"
-              startIcon={<ShoppingCartIcon />}
-              onClick={() => handlePushProduct(item?.id)}
+              onClick={() => router.push(`/produtos/alimentos/${item?.slug}`)}
             >
-              + Carrinho
+              Ver
             </Button>
           </ContentCard>
         ))}

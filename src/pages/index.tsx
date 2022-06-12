@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import Card from '../components/CardProduct';
-import Filters from '../components/Filters';
+import Card from '../components/core/CardProduct';
+import Filters from '../components/core/Filters';
 import { foodService } from '../services';
 import { IFoods } from '../interfaces/IFoods';
 

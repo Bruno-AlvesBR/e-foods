@@ -2,7 +2,7 @@ import { Toolbar } from '@material-ui/core';
 import router from 'next/router';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-import { useCart } from '../../hooks/Cart';
+import { useCart } from '../../../hooks/Cart';
 
 import { LinkCart, Navbar } from './style';
 import { memo } from 'react';

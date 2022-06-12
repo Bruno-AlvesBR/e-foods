@@ -2,9 +2,9 @@ import { Button } from '@material-ui/core';
 import Image from 'next/image';
 import { memo, useState } from 'react';
 
-import { useCart } from '../../hooks/Cart';
-import { IProducts } from '../../interfaces/IProduct';
-import { CalcPriceItem } from '../../utils/CalcItemsCart';
+import { useCart } from '../../../hooks/Cart';
+import { IProducts } from '../../../interfaces/IProduct';
+import { CalcPriceItem } from '../../../utils/CalcItemsCart';
 import { ItemAmount } from './counterItem';
 
 import {

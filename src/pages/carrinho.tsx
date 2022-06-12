@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useCart } from '../hooks/Cart';
-import CardCart from '../components/CardCart';
+import CardCart from '../components/core/CardCart';
 
 import { Container, ContentHeader } from '../styles/carrinho.module';
 

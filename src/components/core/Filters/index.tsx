@@ -2,8 +2,8 @@ import { Button } from '@material-ui/core';
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
 import { memo, useCallback, useState } from 'react';
 
-import { useCart } from '../../hooks/Cart';
-import { IFoods } from '../../interfaces/IFoods';
+import { useCart } from '../../../hooks/Cart';
+import { IFoods } from '../../../interfaces/IFoods';
 
 import { ContainerFilters } from './style';
 

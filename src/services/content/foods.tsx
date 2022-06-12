@@ -11,4 +11,12 @@ const findAll = async () => {
   return foodService?.data || [];
 };
 
-export { findAll };
+const findBySlug = async (slug: string | any) => {
+  await delay();
+
+  const foodResponse = await api.get(`product/${slug}`);
+
+  return foodResponse?.data ?? {};
+};
+
+export { findAll, findBySlug };

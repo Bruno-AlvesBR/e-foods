@@ -2,7 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core';
 
 import { CartProvider } from '../hooks/Cart';
-import Header from '../components/Header';
+import Header from '../components/core/Header';
 
 import { theme } from '../styles/theme';
 import { GlobalStyles } from '../styles/globals';
